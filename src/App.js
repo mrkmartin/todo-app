@@ -40,13 +40,18 @@ function App() {
     );
   }
 
+  function handleClear() {
+    setTodos(todos.filter((todo) => !todo.complete));
+  }
+
   return (
-    <div className="App lusitana-regular min-h-screen">
+    <div className="App lusitana-regular min-h-screen text-xs min-[360px]:text-sm min-[414px]:text-lg md:text-2xl">
       <Header todo={todo} setTodo={setTodo} onAddTodo={addTodo} />
       <TodoList
         todos={todos}
         onDelete={deleteTodo}
         onComplete={toggleComplete}
+        onClear={handleClear}
       />
     </div>
   );
