@@ -32,10 +32,22 @@ function App() {
     setTodos(todos.filter((todo) => todo.id !== id));
   }
 
+  function toggleComplete(id) {
+    setTodos(
+      todos.map((todo) =>
+        todo.id === id ? { ...todo, complete: !todo.complete } : todo
+      )
+    );
+  }
+
   return (
     <div className="App lusitana-regular min-h-screen">
       <Header todo={todo} setTodo={setTodo} onAddTodo={addTodo} />
-      <TodoList todos={todos} onDelete={deleteTodo} />
+      <TodoList
+        todos={todos}
+        onDelete={deleteTodo}
+        onComplete={toggleComplete}
+      />
     </div>
   );
 }
