@@ -45,7 +45,7 @@ function App() {
   }
 
   return (
-    <div className="App lusitana-regular min-h-screen text-xs min-[360px]:text-sm min-[414px]:text-lg md:text-2xl">
+    <div className="App josefin-regular min-h-screen text-xs min-[360px]:text-sm min-[414px]:text-lg md:text-3xl lg:text-lg">
       <Header todo={todo} setTodo={setTodo} onAddTodo={addTodo} />
       <TodoList
         todos={todos}

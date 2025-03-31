@@ -8,17 +8,17 @@ body {
   -moz-osx-font-smoothing: grayscale;
   font-size: 18px;
   background-color: hsl(236, 33%, 92%);
-  font-family: "Lusitana", serif;
+  font-family: "Josefin Sans", serif;
 }
 
-.lusitana-regular {
-  font-family: "Lusitana", serif;
+.josefin-regular {
+  font-family: "Josefin Sans", serif;
   font-weight: 400;
   font-style: normal;
 }
 
-.lusitana-bold {
-  font-family: "Lusitana", serif;
+.josefin-bold {
+  font-family: "Josefin Sans", serif;
   font-weight: 700;
   font-style: normal;
 }
