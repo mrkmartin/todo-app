@@ -50,7 +50,7 @@ Users should be able to:
 - Semantic HTML5 markup
 - Flexbox
 - Mobile-first workflow
-- [React](https://reactjs.org/) - JS library
+- [React](https://react.dev/) - JS library
 - [Tailwind CSS](https://tailwindcss.com/) - For styles
 
 ### What I learned
