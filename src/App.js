@@ -18,6 +18,8 @@ const todoList = [
 function App() {
   const [todos, setTodos] = useState(todoList);
   const [todo, setTodo] = useState("");
+  const [darkTheme, setDarkTheme] = useState(true);
+  const [isfading, setIsFading] = useState(false);
 
   function addTodo() {
     if (todo.trim() === "") return;
@@ -44,14 +46,34 @@ function App() {
     setTodos(todos.filter((todo) => !todo.complete));
   }
 
+  function changeTheme() {
+    setIsFading(true);
+    setTimeout(() => {
+      setDarkTheme(!darkTheme);
+      setIsFading(false);
+    }, 200);
+  }
+
+  document.body.style.backgroundColor = darkTheme
+    ? "hsl(235,21%,11%)"
+    : "hsl(236,33%,92%)";
+
   return (
-    <div className="App josefin-regular min-h-screen text-xs min-[360px]:text-sm min-[414px]:text-lg md:text-3xl lg:text-lg">
-      <Header todo={todo} setTodo={setTodo} onAddTodo={addTodo} />
+    <div className="w-full h-full josefin-regular min-h-screen text-xs min-[360px]:text-sm min-[414px]:text-lg md:text-3xl lg:text-lg">
+      <Header
+        todo={todo}
+        setTodo={setTodo}
+        onAddTodo={addTodo}
+        onChangeTheme={changeTheme}
+        darkTheme={darkTheme}
+        isFading={isfading}
+      />
       <TodoList
         todos={todos}
         onDelete={deleteTodo}
         onComplete={toggleComplete}
         onClear={handleClear}
+        darkTheme={darkTheme}
       />
     </div>
   );

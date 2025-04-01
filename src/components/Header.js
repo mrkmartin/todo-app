@@ -1,18 +1,29 @@
-import React, { useState } from "react";
+import React from "react";
 import { useResolution } from "../useResolution";
 
-const Header = ({ todo, setTodo, onAddTodo }) => {
-  const [darkTheme, setDarkTheme] = useState(false);
-  const [isfading, setIsFading] = useState(false);
-  const { isMobile } = useResolution();
+const Header = ({
+  todo,
+  setTodo,
+  onAddTodo,
+  onChangeTheme,
+  isFading,
+  darkTheme,
+}) => {
+  const { isMobile, isTablet } = useResolution();
 
   return (
     <div className="relative">
       <img
         src={
-          isMobile
+          !isMobile && !isTablet && darkTheme
+            ? "images/bg-desktop-dark.jpg"
+            : !isMobile && !isTablet && !darkTheme
+            ? "images/bg-desktop-light.jpg"
+            : isMobile && isTablet && !darkTheme
             ? "images/bg-mobile-light.jpg"
-            : "images/bg-desktop-light.jpg"
+            : isMobile && darkTheme
+            ? "images/bg-mobile-dark.jpg"
+            : "images/bg-mobile-light.jpg"
         }
         alt="bg-mobile-light"
         className="w-full"
@@ -21,21 +32,12 @@ const Header = ({ todo, setTodo, onAddTodo }) => {
         <h2 className="uppercase text-[hsl(0,0%,98%)] josefin-bold  tracking-[0.5em] text-xl min-[375px]:text-2xl md:text-5xl lg:text-4xl">
           Todo
         </h2>
-        <button
-          className="w-4 h-4 md:w-7 md:h-7"
-          onClick={() => {
-            setIsFading(true);
-            setTimeout(() => {
-              setDarkTheme(!darkTheme);
-              setIsFading(false);
-            }, 200);
-          }}
-        >
+        <button className="w-4 h-4 md:w-7 md:h-7" onClick={onChangeTheme}>
           <img
             src={darkTheme ? `images/icon-sun.svg` : `images/icon-moon.svg`}
             alt="moon-icon"
             className={`w-full h-full transition-all duration-200 ease-in ${
-              isfading ? "opacity-0" : "opacity-100"
+              isFading ? "opacity-0" : "opacity-100"
             }`}
           />
         </button>
@@ -44,11 +46,21 @@ const Header = ({ todo, setTodo, onAddTodo }) => {
       <div>
         <label className="flex items-center space-x-2 absolute top-[57%] min-[375px]:top-[58%] left-6 min-[375px]:left-8 md:left-[10%] lg:top-[55%] lg:left-[32%] z-10">
           <input type="checkbox" className="peer hidden" />
-          <div className="w-4 h-4 md:w-8 md:h-8 lg:w-5 lg:h-5 rounded-full border-2 border-[hsl(236,33%,92%)]"></div>
+          <div
+            className={`w-4 h-4 md:w-8 md:h-8 lg:w-5 lg:h-5 rounded-full border-2 ${
+              darkTheme
+                ? "border-[hsl(237,14%,26%)]"
+                : "border-[hsl(236,33%,92%)]"
+            }`}
+          ></div>
         </label>
         <div>
           <input
-            className="w-[87%] h-[25%] lg:w-[37%] lg:h-[18%] absolute left-1/2 top-1/2 transform -translate-x-1/2 rounded-md pl-10 md:pl-[12%] lg:pl-[4%] lg:pt-[1px] outline-0"
+            className={`w-[87%] h-[25%] lg:w-[37%] lg:h-[18%] absolute left-1/2 top-1/2 transform -translate-x-1/2 rounded-md pl-10 md:pl-[12%] lg:pl-[4%] lg:pt-[1px] outline-0 ${
+              darkTheme
+                ? "bg-[hsl(235,24%,19%)] text-[hsl(234,39%,85%)]"
+                : "bg-[hsl(0,0%,98%)] text-[hsl(235,19%,35%)]"
+            }`}
             type="text"
             placeholder="Create a new todo..."
             value={todo}
